@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>事件委托</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #333;
+        height: 100vh;
+      }
+
+      #root {
+        width: 300px;
+        height: 300px;
+        background-color: lightblue;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .outer {
+        width: 200px;
+        height: 200px;
+        background-color: lightgreen;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .inner {
+        width: 100px;
+        height: 100px;
+        background-color: lightcoral;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <div class="outer">
+        <div class="inner"></div>
+      </div>
+    </div>
+    <!--     <script>
+      // 层级结构:window -> document -> html -> body -> root -> outer -> inner
+      const html = document.documentElement,
+        body = document.body,
+        root = document.getElementById("root"),
+        outer = document.querySelector(".outer"),
+        inner = document.querySelector(".inner");
+
+      //第三个参数是 isCapture:是否在捕获阶段触发, false 是在冒泡阶段触发 、true 是在捕获阶段触发,默认false
+      root.addEventListener(
+        "click",
+        function (e) {
+          console.log("root捕获");
+        },
+        true
+      );
+      root.addEventListener(
+        "click",
+        function () {
+          console.log("root冒泡");
+        },
+        false
+      );
+      outer.addEventListener(
+        "click",
+        function () {
+          console.log("outer捕获");
+        },
+        true
+      );
+      outer.addEventListener(
+        "click",
+        function () {
+          console.log("outer冒泡");
+        },
+        false
+      );
+      inner.addEventListener(
+        "click",
+        function (e) {
+          console.log("inner捕获");
+        },
+        true
+      );
+      inner.addEventListener(
+        "click",
+        function (e) {
+          e.stopPropagation(); // 阻止事件传播
+          e.stopImmediatePropagation(); // 也是阻止事件传播，只不过它可以把当前元素绑定的其它方法也阻止
+          console.log("inner冒泡");
+        },
+        false
+      );
+
+      inner.addEventListener(
+        "click",
+        function (e) {
+          e.stopPropagation();
+          console.log("inner2冒泡");
+        },
+        false
+      );
+    </script> -->
+    <script>
+      /* 
+            事件委托:利用事件的传播机制，实现一套时间绑定处理方案
+                - 例如: 一个容器中，有很多元素都要再点击的时候处理一些事情
+                    - 传统方案:首先获取需要操作的元素，然后逐一做事件绑定
+                    - 事件委托: 只需要给容器绑定一个事件处理函数(点击内部的任何元素，根据事件的传播机制，都会让容器的点击事件也触发，我们在这里，根据事件源，做不同的事情就可以了)
+        */
+
+      body = document.body;
+      body.addEventListener("click", function (e) {
+        const target = e.target; // 点击的谁，谁就是事件源
+        console.log('target',target)
+        // if (e.target.id === "root") {
+        //   console.log("root");
+        //   return;
+        // }
+      });
+    </script>
+  </body>
+</html>

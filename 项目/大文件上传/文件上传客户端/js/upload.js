@@ -120,15 +120,16 @@ const delay = function delay(interval) {
     };
 
     // 把选择的文件读取成为BASE64
-    const changeBASE64 = file => {
-        return new Promise(resolve => {
-            let fileReader = new FileReader();
-            fileReader.readAsDataURL(file);
-            fileReader.onload = ev => {
-                resolve(ev.target.result);
-            };
-        });
-    };
+    // const changeBASE64 = file => {
+    //     return new Promise(resolve => {
+    //         let fileReader = new FileReader();
+    //         fileReader.readAsDataURL(file);
+    //         fileReader.onload = ev => {
+    //             resolve(ev.target.result);
+    //         };
+    //     });
+    // };
+
 
     upload_inp.addEventListener('change', async function () {
         let file = upload_inp.files[0],
@@ -647,6 +648,7 @@ const delay = function delay(interval) {
                 clear();
             });
         });
+
     });
 
     upload_button_select.addEventListener('click', function () {
