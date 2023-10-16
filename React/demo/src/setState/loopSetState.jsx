@@ -25,7 +25,7 @@ class LoopSetState extends React.Component {
         </>
     }
 
-    render() {
+        render() {
 
         this.setState({
 

@@ -7,6 +7,7 @@ class Synthetic extends React.Component {
 
     }
     render() {
+        
         return <>
             <button onClick={this.handle}>按钮</button>
         </>
