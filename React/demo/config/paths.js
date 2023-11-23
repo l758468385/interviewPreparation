@@ -37,6 +37,7 @@ const moduleFileExtensions = [
   'jsx',
 ];
 
+
 // Resolve file paths in the same order as webpack
 const resolveModule = (resolveFn, filePath) => {
   const extension = moduleFileExtensions.find(extension =>
@@ -71,7 +72,6 @@ module.exports = {
   swSrc: resolveModule(resolveApp, 'src/service-worker'),
   publicUrlOrPath,
 };
-
 
 
 module.exports.moduleFileExtensions = moduleFileExtensions;

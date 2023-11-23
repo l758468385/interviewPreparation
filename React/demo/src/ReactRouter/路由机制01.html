@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>路由机制01</title>
+  </head>
+  <body>
+    <nav-box>
+      <a href="#/">首页</a>
+      <a href="#/product">产品中心</a>
+      <a href="#/personal">个人中心</a>
+    </nav-box>
+    <div class="view-box"></div>
+
+    <script>
+      /* 
+        HASH 路由
+          - 改变路由的哈希值(#/xxx),主页面是不会刷新的
+          - 根据不同的哈希值,让容器中渲染不同的 [组件]
+      */
+
+      // 获取渲染内容的容器
+
+      const viewBox = document.querySelector(".view-box");
+
+      // 构件一个路由列表，每当我们重新加载页面、或者路由切换(切换哈希值),都先导这个路由表进行匹配；根据当前页面的哈希值，匹配出要渲染的页面(组件)
+      
+      const routes = [
+        {
+          path: "/",
+          component: "首页的内容",
+        },
+        {
+          path: "/product",
+          component: "产品中心的内容",
+        },
+        {
+          path: "/personal",
+          component: "个人中心的内容",
+        },
+      ];
+      // 路由匹配的方法
+      const routerMatch = function routerMatch() {
+        let hash = location.hash.substring(1);
+        let text = "";
+
+        routes.forEach((route) => {
+          if (route.path === hash) {
+            text = route.component;
+          }
+        });
+
+        if (text) {
+          return;
+        }
+        // 防抖函数 防止频繁的渲染
+
+        viewBox.innerHTML = text;
+      };
+
+      // 一进来就要展示的就是首页的信息
+      location.hash = "/";
+
+      routerMatch();
+    </script>
+  </body>
+</html>
